@@ -1217,6 +1217,7 @@
 			});
 		} else if(expr.value.body === null && expr.value.head.indicator === ":-/1") {
 			var result = thread.run_directive(expr.value.head.args[0], options);
+			if (result === "recursive") return true;
 			async = async || (result === true);
 			if(async)
 				parseProgram(thread, options.string, options);
@@ -4580,7 +4581,7 @@
 								options.error(pl.error.existence("module", module_id, atom.indicator));
 							}
 						});
-						return true;
+						return "recursive";
 					}
 				}
 			},
